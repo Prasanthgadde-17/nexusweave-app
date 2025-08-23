@@ -21,6 +21,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
@@ -72,20 +73,23 @@ export const AppSidebar = () => {
     >
       <Sidebar className="border-r border-sidebar-border bg-sidebar">
         <SidebarContent className="px-2 py-4">
-          {/* Logo/Brand */}
+          {/* Logo/Brand with Toggle */}
           <motion.div 
             className="px-4 py-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
           >
-            {!collapsed ? (
-              <h2 className="text-2xl font-bold gradient-text">NexusWeave</h2>
-            ) : (
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">N</span>
-              </div>
-            )}
+            <div className="flex items-center justify-between">
+              {!collapsed ? (
+                <h2 className="text-2xl font-bold gradient-text">NexusWeave</h2>
+              ) : (
+                <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">N</span>
+                </div>
+              )}
+              <SidebarTrigger className="hidden lg:flex" />
+            </div>
           </motion.div>
 
           {/* Main Navigation */}

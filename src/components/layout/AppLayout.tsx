@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { Navbar } from "./Navbar";
+import { MobileBottomNav } from "./MobileBottomNav";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         <div className="flex-1 flex flex-col">
           <Navbar />
           
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto pb-20 lg:pb-0">
             <AnimatePresence mode="wait">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -30,6 +30,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
               </motion.div>
             </AnimatePresence>
           </main>
+          
+          <MobileBottomNav />
         </div>
       </div>
     </SidebarProvider>
