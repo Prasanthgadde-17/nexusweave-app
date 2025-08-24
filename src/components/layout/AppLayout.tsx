@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { Navbar } from "./Navbar";
@@ -9,15 +10,18 @@ interface AppLayoutProps {
 }
 
 export const AppLayout = ({ children }: AppLayoutProps) => {
+  const location = useLocation();
+  const hideNavbar = ['/messages', '/communities'].includes(location.pathname);
+  
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-gradient-surface">
-        <AppSidebar />
+        {!hideNavbar && <AppSidebar />}
         
         <div className="flex-1 flex flex-col">
-          <Navbar />
+          {!hideNavbar && <Navbar />}
           
-          <main className="flex-1 overflow-auto pb-20 lg:pb-0">
+          <main className={`flex-1 overflow-auto ${hideNavbar ? 'pb-0' : 'pb-20 lg:pb-0'}`}>
             <AnimatePresence mode="wait">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -31,7 +35,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
             </AnimatePresence>
           </main>
           
-          <MobileBottomNav />
+          {!hideNavbar && <MobileBottomNav />}
         </div>
       </div>
     </SidebarProvider>
